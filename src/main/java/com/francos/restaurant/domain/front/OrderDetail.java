@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
 
 /**
@@ -19,7 +20,10 @@ import java.math.BigDecimal;
 @EqualsAndHashCode(callSuper = true)
 public class OrderDetail extends BaseAuditEntity {
 
+    @ManyToOne
+    private GuestOrder guestOrder;
 
+    @ManyToOne
     private MenuItem menuItem;
 
     private BigDecimal discount;

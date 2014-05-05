@@ -1,9 +1,13 @@
 package com.francos.restaurant.domain.base;
 
+import com.francos.restaurant.domain.front.GuestOrder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,4 +24,6 @@ public class Staff extends BaseAuditEntity {
     private String firstName;
     private String lastName;
 
+    @OneToMany(mappedBy = "server")
+    private Set<GuestOrder> orders;
 }

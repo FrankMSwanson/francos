@@ -6,7 +6,7 @@ import com.francos.restaurant.domain.type.OfferingType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Set;
 
@@ -24,6 +24,7 @@ import java.util.Set;
 public class Offering extends BaseAuditEntity {
 
 
+    @Enumerated(EnumType.STRING)
     private OfferingType offeringType;
 
     private String description;
@@ -31,7 +32,11 @@ public class Offering extends BaseAuditEntity {
     private BigDecimal cost;
 
 
-    private Set<FoodItem> ingredients;
+    @ManyToMany
+    @JoinTable(name="offering_food_items",
+            joinColumns={@JoinColumn(name="offering_id")},
+            inverseJoinColumns={@JoinColumn(name="food_item_id")})
+    private Set<FoodItem> foodItems;
 
     //Link to external stockSystem
     private Long stockId;

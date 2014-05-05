@@ -6,6 +6,7 @@ import com.fasterxml.jackson.datatype.joda.deser.LocalDateDeserializer;
 import com.francos.restaurant.domain.base.BaseAuditEntity;
 import com.francos.restaurant.domain.base.Staff;
 import com.francos.restaurant.domain.util.CustomLocalDateSerializer;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -22,15 +23,18 @@ import java.util.List;
 /**
  * A GuestOrder.
  */
+@Data
 @Entity
 @EqualsAndHashCode(callSuper = true)
 public class GuestOrder extends BaseAuditEntity {
 
 
+    @ManyToOne
     private Staff server;
 
-    private String table;
+    private String tableName;
 
+    @OneToMany(mappedBy = "guestOrder")
     private List<OrderDetail> items;
 
 

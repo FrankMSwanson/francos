@@ -73,8 +73,7 @@ public class GuestOrderResourceTest {
 
         guestorder = new GuestOrder();
         guestorder.setId(DEFAULT_ID);
-    	guestorder.setSampleDateAttribute(DEFAULT_SAMPLE_DATE_ATTR);
-    	guestorder.setSampleTextAttribute(DEFAULT_SAMPLE_TEXT_ATTR);
+
     }
 
     @Test
@@ -94,9 +93,7 @@ public class GuestOrderResourceTest {
     			.andExpect(jsonPath("$.sampleDateAttribute").value(DEFAULT_SAMPLE_DATE_ATTR.toString()))
     			.andExpect(jsonPath("$.sampleTextAttribute").value(DEFAULT_SAMPLE_TEXT_ATTR));
 
-    	// Update GuestOrder
-    	guestorder.setSampleDateAttribute(UPD_SAMPLE_DATE_ATTR);
-    	guestorder.setSampleTextAttribute(UPD_SAMPLE_TEXT_ATTR);
+
   
     	restGuestOrderMockMvc.perform(post("/app/rest/guestorders")
     			.contentType(TestUtil.APPLICATION_JSON_UTF8)
