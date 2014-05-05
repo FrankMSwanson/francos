@@ -34,7 +34,7 @@ public class GuestOrder extends BaseAuditEntity {
 
     private String tableName;
 
-    @OneToMany(mappedBy = "guestOrder")
+    @OneToMany(mappedBy = "guestOrder", fetch = FetchType.EAGER)
     private List<OrderDetail> items;
 
 

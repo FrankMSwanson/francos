@@ -19,12 +19,20 @@ public final class SecurityUtils {
      * Get the login of the current user.
      */
     public static String getCurrentLogin() {
+        String fakeReturn = "defaulted";
         SecurityContext securityContext = SecurityContextHolder.getContext();
+
+        if(null == securityContext
+                || null == securityContext.getAuthentication()
+                || null == securityContext.getAuthentication().getPrincipal()){
+            return fakeReturn;
+        }
         UserDetails springSecurityUser =
                 (UserDetails) securityContext
                         .getAuthentication().getPrincipal();
 
-        return springSecurityUser.getUsername();
+        String ret = springSecurityUser.getUsername();
+        return  null == ret ? ret : fakeReturn;
     }
 
     /**

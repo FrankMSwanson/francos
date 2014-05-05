@@ -58,8 +58,10 @@ public class GuestOrderResource {
         log.debug("REST request to get GuestOrder : {}", id);
         GuestOrder guestorder = guestorderRepository.findOne(id);
         if (guestorder == null) {
+            log.debug("Its null dude");
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
+        //log.debug("returning guuestorder {} status is {}", guestorder.getId(), response.getStatus());
         return guestorder;
     }
 

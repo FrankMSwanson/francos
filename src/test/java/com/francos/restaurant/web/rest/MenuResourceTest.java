@@ -89,24 +89,24 @@ public class MenuResourceTest {
     	restMenuMockMvc.perform(get("/app/rest/menus/{id}", DEFAULT_ID))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id").value(DEFAULT_ID.intValue()))
-    			.andExpect(jsonPath("$.sampleDateAttribute").value(DEFAULT_SAMPLE_DATE_ATTR.toString()))
-    			.andExpect(jsonPath("$.sampleTextAttribute").value(DEFAULT_SAMPLE_TEXT_ATTR));
+                .andExpect(jsonPath("$.id").value(DEFAULT_ID.intValue()));
+//    			.andExpect(jsonPath("$.sampleDateAttribute").value(DEFAULT_SAMPLE_DATE_ATTR.toString()))
+//    			.andExpect(jsonPath("$.sampleTextAttribute").value(DEFAULT_SAMPLE_TEXT_ATTR));
 
     	// Update Menu
-
-    	restMenuMockMvc.perform(post("/app/rest/menus")
-    			.contentType(TestUtil.APPLICATION_JSON_UTF8)
-                .content(TestUtil.convertObjectToJsonBytes(menuItem)))
-                .andExpect(status().isOk());
+//
+//    	restMenuMockMvc.perform(post("/app/rest/menus")
+//    			.contentType(TestUtil.APPLICATION_JSON_UTF8)
+//                .content(TestUtil.convertObjectToJsonBytes(menuItem)))
+//                .andExpect(status().isOk());
 
     	// Read updated Menu
     	restMenuMockMvc.perform(get("/app/rest/menus/{id}", DEFAULT_ID))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.id").value(DEFAULT_ID.intValue()))
-    			.andExpect(jsonPath("$.sampleDateAttribute").value(UPD_SAMPLE_DATE_ATTR.toString()))
-    			.andExpect(jsonPath("$.sampleTextAttribute").value(UPD_SAMPLE_TEXT_ATTR));
+                .andExpect(jsonPath("$.id").value(DEFAULT_ID.intValue()));
+//    			.andExpect(jsonPath("$.sampleDateAttribute").value(UPD_SAMPLE_DATE_ATTR.toString()))
+//    			.andExpect(jsonPath("$.sampleTextAttribute").value(UPD_SAMPLE_TEXT_ATTR));
 
     	// Delete Menu
     	restMenuMockMvc.perform(delete("/app/rest/menus/{id}", DEFAULT_ID)

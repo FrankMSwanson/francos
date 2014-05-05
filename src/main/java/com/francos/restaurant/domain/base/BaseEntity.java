@@ -23,9 +23,6 @@ public class BaseEntity implements Serializable{
     @GeneratedValue(strategy = GenerationType.TABLE)
     protected Long id;
 
-    @Version
-    private Long version;
-
 
     @Override
     public int hashCode() {
