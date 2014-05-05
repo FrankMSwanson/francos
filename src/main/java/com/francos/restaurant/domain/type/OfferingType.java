@@ -1,7 +1,7 @@
 package com.francos.restaurant.domain.type;
 
 /**
- * Created with IntelliJ IDEA.
+ * Simple List of potentially saleable item types
  * User: frankswanson
  * Date: 5/4/14
  * Time: 10:23 PM
@@ -12,5 +12,5 @@ public enum OfferingType {
     Entree,
     Desert,
     Drink,
-    DryGood;
+    DryGood
 }
