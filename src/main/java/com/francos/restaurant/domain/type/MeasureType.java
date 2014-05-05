@@ -8,6 +8,7 @@ package com.francos.restaurant.domain.type;
  * To change this template use File | Settings | File Templates.
  */
 public enum MeasureType {
+    /** TODO look further into jsr 363 and implement here ... maybe contribute **/
     TeaSpoon,
     TableSpoon,
     Cup,

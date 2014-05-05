@@ -1,6 +1,7 @@
 package com.francos.restaurant.domain.base;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.francos.restaurant.config.Constants;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.validator.constraints.Email;
@@ -20,7 +21,7 @@ import java.util.Set;
 public class User implements Serializable {
 
     @NotNull
-    @Size(min = 0, max = 50)
+    @Size(min = 0, max = Constants.LOGIN_LENGTH)
     @Id
     private String login;
 

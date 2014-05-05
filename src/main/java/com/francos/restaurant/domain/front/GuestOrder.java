@@ -38,10 +38,15 @@ public class GuestOrder extends BaseAuditEntity {
     private List<OrderDetail> items;
 
 
+    @Column(precision = 9, scale = 2)
     private BigDecimal itemTotal;
+    @Column(precision = 7, scale = 2)
     private BigDecimal discount;
 
+    @Column(precision = 7, scale = 2)
     private BigDecimal tip;
+    @Column(precision = 7, scale = 2)
     private BigDecimal tax;
+    @Column(precision = 9, scale = 2)
     private BigDecimal total;
 }

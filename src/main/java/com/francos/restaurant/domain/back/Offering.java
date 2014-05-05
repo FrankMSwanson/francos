@@ -24,11 +24,14 @@ import java.util.Set;
 public class Offering extends BaseAuditEntity {
 
 
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private OfferingType offeringType;
 
+    @Column(nullable = false)
     private String description;
 
+    @Column(nullable = false, precision = 6, scale = 2)
     private BigDecimal cost;
 
 

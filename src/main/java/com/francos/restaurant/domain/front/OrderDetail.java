@@ -1,9 +1,11 @@
 package com.francos.restaurant.domain.front;
 
+import com.francos.restaurant.config.Constants;
 import com.francos.restaurant.domain.base.BaseAuditEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import java.math.BigDecimal;
@@ -20,12 +22,21 @@ import java.math.BigDecimal;
 @EqualsAndHashCode(callSuper = true)
 public class OrderDetail extends BaseAuditEntity {
 
+    /**
+     * Support multiplicity at the detail level
+     */
+    @Column(columnDefinition = Constants.DB_INT_NN_DEF1)
+    private int quantity;
+
     @ManyToOne
     private GuestOrder guestOrder;
 
     @ManyToOne
     private MenuItem menuItem;
 
-    private BigDecimal discount;
+    /**
+     * This is the per item discount ... once per each in teh quantity
+     */
+    private BigDecimal discountPerItem;
 
 }
