@@ -2,13 +2,16 @@ package com.francos.restaurant.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.francos.restaurant.domain.front.MenuItem;
-import com.francos.restaurant.repository.MenuRepository;
+import com.francos.restaurant.repository.MenuItemRepository;
+import com.francos.restaurant.web.rest.converter.MenuItemCnv;
+import com.francos.restaurant.web.rest.dto.MenuItemDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,7 +24,7 @@ public class MenuResource {
     private final Logger log = LoggerFactory.getLogger(MenuResource.class);
 
     @Inject
-    private MenuRepository menuRepository;
+    private MenuItemRepository menuItemRepository;
 
     /**
      * POST  /rest/menus -> Create a new menu.
@@ -30,9 +33,12 @@ public class MenuResource {
             method = RequestMethod.POST,
             produces = "application/json")
     @Timed
-    public void create(@RequestBody MenuItem menuItem) {
-        log.debug("REST request to save Menu : {}", menuItem);
-        menuRepository.save(menuItem);
+    public void create(@RequestBody MenuItemDTO menuItemDTO) {
+        log.debug("REST request to save Menu : {}", menuItemDTO);
+
+        MenuItem menuItem = new MenuItem();
+        MenuItemCnv.copyFields(menuItem, menuItemDTO);
+        menuItemRepository.save(menuItem);
     }
 
     /**
@@ -42,9 +48,13 @@ public class MenuResource {
             method = RequestMethod.GET,
             produces = "application/json")
     @Timed
-    public List<MenuItem> getAll() {
+    public List<MenuItemDTO> getAll() {
         log.debug("REST request to get all Menus");
-        return menuRepository.findAll();
+        List<MenuItemDTO> menuItemDTOs = new ArrayList<>();
+        for(MenuItem menuItem: menuItemRepository.findAll()){
+            menuItemDTOs.add(MenuItemCnv.toDTO(menuItem));
+        }
+        return menuItemDTOs;
     }
 
     /**
@@ -54,13 +64,13 @@ public class MenuResource {
             method = RequestMethod.GET,
             produces = "application/json")
     @Timed
-    public MenuItem get(@PathVariable Long id, HttpServletResponse response) {
+    public MenuItemDTO get(@PathVariable Long id, HttpServletResponse response) {
         log.debug("REST request to get Menu : {}", id);
-        MenuItem menuItem = menuRepository.findOne(id);
-        if (menuItem == null) {
+        MenuItemDTO MenuItemDTO = MenuItemCnv.toDTO(menuItemRepository.findOne(id));
+        if (MenuItemDTO == null) {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
         }
-        return menuItem;
+        return MenuItemDTO;
     }
 
     /**
@@ -72,6 +82,6 @@ public class MenuResource {
     @Timed
     public void delete(@PathVariable Long id, HttpServletResponse response) {
         log.debug("REST request to delete Menu : {}", id);
-        menuRepository.delete(id);
+        menuItemRepository.delete(id);
     }
 }

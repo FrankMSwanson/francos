@@ -36,6 +36,7 @@ public class FoodItem extends BaseAuditEntity {
     @Column(precision = 7, scale = 2)
     private BigDecimal price;
 
+    @Enumerated(EnumType.STRING)
     private MeasureType measureType;
 
     private int stock;

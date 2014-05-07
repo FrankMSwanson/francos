@@ -9,6 +9,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import javax.inject.Inject;
 
+import com.francos.restaurant.repository.MenuItemRepository;
 import org.joda.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,7 +30,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.francos.restaurant.Application;
 import com.francos.restaurant.domain.front.MenuItem;
-import com.francos.restaurant.repository.MenuRepository;
 
 
 /**
@@ -57,7 +57,7 @@ public class MenuResourceTest {
     private static final String UPD_SAMPLE_TEXT_ATTR = "sampleTextAttributeUpt";
 
     @Inject
-    private MenuRepository menuRepository;
+    private MenuItemRepository menuItemRepository;
 
     private MockMvc restMenuMockMvc;
     
@@ -67,7 +67,7 @@ public class MenuResourceTest {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         MenuResource menuResource = new MenuResource();
-        ReflectionTestUtils.setField(menuResource, "menuRepository", menuRepository);
+        ReflectionTestUtils.setField(menuResource, "menuRepository", menuItemRepository);
 
         this.restMenuMockMvc = MockMvcBuilders.standaloneSetup(menuResource).build();
 

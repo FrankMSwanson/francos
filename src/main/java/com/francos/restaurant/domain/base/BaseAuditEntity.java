@@ -1,5 +1,6 @@
 package com.francos.restaurant.domain.base;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.francos.restaurant.config.Constants;
 import com.francos.restaurant.security.SecurityUtils;
 import lombok.Data;
@@ -30,12 +31,14 @@ public class BaseAuditEntity extends BaseEntity{
     private static Logger log = LoggerFactory.getLogger(BaseAuditEntity.class);
     @Column(length = Constants.LOGIN_LENGTH, nullable = false,updatable = false)
     private String createdBy;
+    @JsonIgnore
     @Column(nullable = false)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
     private LocalDateTime createdTime;
 
     @Column(length = Constants.LOGIN_LENGTH, nullable = false,updatable = false)
     private String updatedBy;
+    @JsonIgnore
     @Column(nullable = false)
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
     private LocalDateTime updatedTime;

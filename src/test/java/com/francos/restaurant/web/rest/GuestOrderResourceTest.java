@@ -91,13 +91,16 @@ public class GuestOrderResourceTest {
     			//.andExpect(jsonPath("$.sampleTextAttribute").value(DEFAULT_SAMPLE_TEXT_ATTR));
 
         //Need to move this to a dto
-//        guestorder = guestorderRepository.findOne(DEFAULT_ID);
-//        guestorder.setTableName("a table");
-//
-//        restGuestOrderMockMvc.perform(post("/app/rest/guestorders")
-//                .contentType(TestUtil.APPLICATION_JSON_UTF8)
-//                .content(TestUtil.convertObjectToJsonBytes(guestorder)))
-//                .andExpect(status().isOk());
+        guestorder = guestorderRepository.findOne(DEFAULT_ID);
+        guestorder.setTableName("a table");
+        log.debug("stuff things");
+        log.debug(TestUtil.convertObjectToJsonBytes(guestorder).toString());
+
+        log.debug("got guetOrder {}", guestorder.getCreatedBy());
+        restGuestOrderMockMvc.perform(post("/app/rest/guestorders")
+                .contentType(TestUtil.APPLICATION_JSON_UTF8)
+                .content(TestUtil.convertObjectToJsonBytes(guestorder)))
+                .andExpect(status().isOk());
 
     	// Read updated GuestOrder
     	restGuestOrderMockMvc.perform(get("/app/rest/guestorders/{id}", DEFAULT_ID))

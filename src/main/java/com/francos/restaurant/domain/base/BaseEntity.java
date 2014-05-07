@@ -24,6 +24,9 @@ public class BaseEntity implements Serializable{
     protected Long id;
 
 
+    @Version
+    private Long version;
+
     @Override
     public int hashCode() {
         int hash = 0;
